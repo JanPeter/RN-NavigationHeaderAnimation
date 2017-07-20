@@ -35,6 +35,4 @@ This project is licensed under the MIT License
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* [React Native ScrollView animated header](https://medium.com/appandflow/react-native-scrollview-animated-header-10a18cb9469e)
