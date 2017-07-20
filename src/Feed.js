@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+const HEADER_HEIGHT = 220;
+
 export default class Feed extends Component {
   static navigationOptions = {
     title: "Feed",
@@ -24,6 +26,12 @@ export default class Feed extends Component {
       };
     }
 
+    const translateY = this.props.screenProps.scrollY.interpolate({
+      inputRange: [0, HEADER_HEIGHT],
+      outputRange: [0, HEADER_HEIGHT],
+      extrapolate: "clamp",
+    });
+
     return (
       <View style={{ flex: 1 }}>
         <Animated.ScrollView
@@ -31,7 +39,7 @@ export default class Feed extends Component {
           scrollEventThrottle={1}
           {...animation}
           >
-          <View>
+          <Animated.View style={{ paddingBottom: HEADER_HEIGHT, transform: [{ translateY }] }}>
             <View style={{ backgroundColor: 'green', height: 300 }}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate("profile")} ><Text>Profile</Text></TouchableOpacity>
             </View><View style={{ backgroundColor: 'blue', height: 300 }}>
@@ -41,7 +49,7 @@ export default class Feed extends Component {
             </View><View style={{ backgroundColor: 'blue', height: 300 }}>
               <Text>Test</Text>
             </View>
-          </View>
+          </Animated.View>
         </Animated.ScrollView>
       </View>
     )
