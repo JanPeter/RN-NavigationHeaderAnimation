@@ -1,12 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import {
-  View,
-  ScrollView,
-  Text,
-  Animated,
-} from "react-native";
+import { View, ScrollView, Text, Animated } from "react-native";
 
 import { StackNavigator } from "react-navigation";
 
