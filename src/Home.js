@@ -29,22 +29,31 @@ export default class Home extends Component {
   }
 
   render() {
+    console.log(this.props.navigation);
+
     const translateY = this.offset.interpolate({
       inputRange: [0, HEADER_HEIGHT],
       outputRange: [0, -HEADER_HEIGHT],
       extrapolate: "clamp",
     });
 
+    const { routes, index } = idx(this, _ => _.props.navigation.state) || {};
+    if (routes && routes[index].key === "feed") {
+      return (
+        <View style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+          <Animated.View style={[{ position: 'absolute', top: 0, left: 0, right: 0, overflow: "hidden", backgroundColor: "red", height: HEADER_HEIGHT }, { transform: [{ translateY }] }]}>
+            <Text>Test</Text>
+          </Animated.View>
+          <Animated.View style={[{ marginTop: HEADER_HEIGHT, flex: 1, marginBottom: -HEADER_HEIGHT }, { transform: [{ translateY }] }]}>
+            <TabView navigation={this.props.navigation} screenProps={{scrollY: this.offset}}/>
+          </Animated.View>
+        </View>
+      );
+    }
+
     return (
-      <View style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-        <Animated.View style={[{ position: 'absolute', top: 0, left: 0, right: 0, overflow: "hidden", backgroundColor: "red", height: HEADER_HEIGHT }, { transform: [{ translateY }] }]}>
-          <Text>Test</Text>
-        </Animated.View>
-        <Animated.View style={[{ marginTop: HEADER_HEIGHT, flex: 1, marginBottom: -HEADER_HEIGHT }, { transform: [{ translateY }] }]}>
-          <TabView navigation={this.props.navigation} screenProps={{scrollY: this.offset}}/>
-        </Animated.View>
-      </View>
-    )
+      <TabView navigation={this.props.navigation} />
+    );
   }
 }
 
