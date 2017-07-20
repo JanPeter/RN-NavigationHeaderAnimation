@@ -41,9 +41,11 @@ export default class Home extends Component {
           <Text>Test</Text>
         </Animated.View>
         <Animated.View style={[{ marginTop: HEADER_HEIGHT, flex: 1, marginBottom: -HEADER_HEIGHT }, { transform: [{ translateY }] }]}>
-          <TabView screenProps={{scrollY: this.offset}}/>
+          <TabView navigation={this.props.navigation} screenProps={{scrollY: this.offset}}/>
         </Animated.View>
       </View>
     )
   }
 }
+
+Home.router = TabView.router;
