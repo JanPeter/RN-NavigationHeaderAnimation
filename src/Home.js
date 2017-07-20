@@ -22,13 +22,14 @@ const TabView = TabNavigator(
 );
 
 export default class Home extends Component {
+  offset: Animated.Value;
+  static router = TabView.router;
+
   componentWillMount() {
     this.offset = new Animated.Value(0);
   }
 
   render() {
-    console.log(this.props.navigation);
-
     const translateY = this.offset.interpolate({
       inputRange: [0, HEADER_HEIGHT],
       outputRange: [0, -HEADER_HEIGHT],
@@ -77,5 +78,3 @@ export default class Home extends Component {
     return <TabView navigation={this.props.navigation} />;
   }
 }
-
-Home.router = TabView.router;
